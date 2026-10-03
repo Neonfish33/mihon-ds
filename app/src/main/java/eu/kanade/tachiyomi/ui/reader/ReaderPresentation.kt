@@ -432,7 +432,7 @@ class ReaderPresentation(
                             val primaryOffset = firstView.top
                             val primaryHeight = primaryViewer.recycler.height
 
-                            val targetOffset = (primaryOffset - primaryHeight) * ratio
+                            val targetOffset = (primaryOffset + primaryHeight) * ratio
 
                             val secFirstPos = secondaryLayout.findFirstVisibleItemPosition()
                             val secFirstView = secondaryLayout.findViewByPosition(secFirstPos)
