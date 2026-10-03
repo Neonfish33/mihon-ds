@@ -11,6 +11,18 @@ A specialized fork of [Mihon](https://mihon.app) optimized for devices with seco
 
 </div>
 
+## Changes in this fork
+
+Fork of [mis0suppe/mihon-ds](https://github.com/mis0suppe/mihon-ds).
+
+*   **Webtoon spanning order fix for stacked dual screens** (Anbernic RG DS, AYN Thor, etc.).
+    On devices whose two screens are stacked vertically, the secondary (top) screen used to show
+    the part *below* the primary, which reads backwards. This fork shows the beginning on the
+    primary and the continuation on the secondary, so the strip reads top-to-bottom
+    (branch `fix/manhwa-span-order`).
+*   **Build fix:** the pinned JitPack `FlexibleAdapter` snapshot (`c8013533`) is gone; replaced with
+    `eu.davidea:flexible-adapter:5.1.0`.
+
 ## Features
 
 <div align="left">
