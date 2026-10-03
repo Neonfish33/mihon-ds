@@ -52,6 +52,12 @@ class WebtoonRecyclerView @JvmOverloads constructor(
 
     var doubleTapZoom = true
 
+    /**
+     * When true, free drag scrolling is disabled and only programmatic page scrolls are allowed.
+     * Used by the e-ink page-by-page webtoon mode.
+     */
+    var blockDragScroll = false
+
     var tapListener: ((MotionEvent) -> Unit)? = null
     var longTapListener: ((MotionEvent) -> Boolean)? = null
     var onViewportChangedListener: ((ViewportInfo) -> Unit)? = null
@@ -75,6 +81,11 @@ class WebtoonRecyclerView @JvmOverloads constructor(
         }
 
         detector.onTouchEvent(e)
+        if (blockDragScroll) {
+            // E-ink page-by-page mode: consume the touch so the recycler does not scroll
+            // freely. Page turns are done programmatically (tap/keys/actions).
+            return true
+        }
         return super.onTouchEvent(e)
     }
 

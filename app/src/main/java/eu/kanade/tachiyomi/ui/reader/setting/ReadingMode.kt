@@ -9,6 +9,7 @@ import eu.kanade.tachiyomi.ui.reader.viewer.pager.L2RPagerViewer
 import eu.kanade.tachiyomi.ui.reader.viewer.pager.R2LPagerViewer
 import eu.kanade.tachiyomi.ui.reader.viewer.pager.VerticalPagerViewer
 import eu.kanade.tachiyomi.ui.reader.viewer.webtoon.WebtoonViewer
+import eu.kanade.tachiyomi.ui.reader.viewer.eink.EinkWebtoonViewer
 import tachiyomi.i18n.MR
 
 enum class ReadingMode(
@@ -72,7 +73,7 @@ enum class ReadingMode(
                 RIGHT_TO_LEFT -> R2LPagerViewer(activity)
                 VERTICAL -> VerticalPagerViewer(activity)
                 WEBTOON -> WebtoonViewer(activity)
-                CONTINUOUS_VERTICAL -> WebtoonViewer(activity, isContinuous = false)
+                CONTINUOUS_VERTICAL -> EinkWebtoonViewer(activity)
                 DEFAULT -> throw IllegalStateException("Preference value must be resolved: $preference")
             }
         }

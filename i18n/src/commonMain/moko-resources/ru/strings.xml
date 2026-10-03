@@ -334,7 +334,7 @@
     <string name="pref_category_reading">Чтение</string>
     <string name="pref_skip_filtered_chapters">Пропускать отфильтрованные главы</string>
     <string name="action_select_inverse">Выбрать наоборот</string>
-    <string name="vertical_plus_viewer">Длинные страницы с зазорами</string>
+    <string name="vertical_plus_viewer">Вебтун (по страницам)</string>
     <string name="pref_webtoon_side_padding">Боковой отступ</string>
     <string name="pinned_sources">Закреплено</string>
     <string name="action_unpin">Открепить</string>

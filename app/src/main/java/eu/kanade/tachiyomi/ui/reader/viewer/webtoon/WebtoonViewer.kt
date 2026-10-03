@@ -117,6 +117,7 @@ class WebtoonViewer(val activity: ReaderActivity, val isContinuous: Boolean = tr
         recycler.itemAnimator = null
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter
+        recycler.blockDragScroll = !isContinuous
         recycler.addOnScrollListener(
             object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -328,11 +329,19 @@ class WebtoonViewer(val activity: ReaderActivity, val isContinuous: Boolean = tr
     }
 
     /**
+     * Height of the visible viewport. Used as the page step in e-ink page mode so a page turn
+     * never skips content (displayMetrics includes system bars the reader doesn't show).
+     */
+    private val viewportHeight: Int
+        get() = recycler.height.takeIf { it > 0 } ?: activity.resources.displayMetrics.heightPixels
+
+    /**
      * Scrolls up by [scrollDistance].
      */
     private fun scrollUp(multiplier: Int = 1): Boolean {
-        val distance = -scrollDistance * multiplier
-        if (config.usePageTransitions) {
+        val step = if (isContinuous) scrollDistance else viewportHeight
+        val distance = -step * multiplier
+        if (config.usePageTransitions && isContinuous) {
             recycler.smoothScrollBy(0, distance)
         } else {
             recycler.scrollBy(0, distance)
@@ -344,8 +353,9 @@ class WebtoonViewer(val activity: ReaderActivity, val isContinuous: Boolean = tr
      * Scrolls down by [scrollDistance].
      */
     private fun scrollDown(multiplier: Int = 1): Boolean {
-        val distance = scrollDistance * multiplier
-        if (config.usePageTransitions) {
+        val step = if (isContinuous) scrollDistance else viewportHeight
+        val distance = step * multiplier
+        if (config.usePageTransitions && isContinuous) {
             recycler.smoothScrollBy(0, distance)
         } else {
             recycler.scrollBy(0, distance)
