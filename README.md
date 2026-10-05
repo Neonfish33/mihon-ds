@@ -15,11 +15,19 @@ A specialized fork of [Mihon](https://mihon.app) optimized for devices with seco
 
 Fork of [mis0suppe/mihon-ds](https://github.com/mis0suppe/mihon-ds).
 
-*   **Webtoon spanning order fix for stacked dual screens** (Anbernic RG DS, AYN Thor, etc.).
-    On devices whose two screens are stacked vertically, the secondary (top) screen used to show
-    the part *below* the primary, which reads backwards. This fork shows the beginning on the
-    primary and the continuation on the secondary, so the strip reads top-to-bottom
-    (branch `fix/manhwa-span-order`).
+*   **Webtoon spanning order fix for _bottom-primary_ stacked dual screens** (Anbernic RG DS, AYANEO Pocket DS).
+    On these devices the **main display is the bottom screen**, but the secondary-screen logic assumes
+    it sits *below* the primary, so the strip read backwards (continuation above the beginning). This
+    fork flips the vertical offset so the beginning is on the main (bottom) screen and the continuation
+    on the secondary (top) one (branch `fix/manhwa-span-order`).
+
+    > [!WARNING]
+    > This is a hardcoded, device-specific flip. It **breaks top-primary devices such as the AYN Thor**
+    > (their main display is the top screen), and the companion page order has the same issue.
+    > Upstream closed our [PR #18](https://github.com/mis0suppe/mihon-ds/pull/18) and is implementing a
+    > proper screen-position setting with per-device defaults, tracked in
+    > [mis0suppe/mihon-ds#19](https://github.com/mis0suppe/mihon-ds/issues/19). This fork is an
+    > **interim fix for the RG DS / Pocket DS** (bottom-primary) until that lands.
 *   **Build fix:** the pinned JitPack `FlexibleAdapter` snapshot (`c8013533`) is gone; replaced with
     `eu.davidea:flexible-adapter:5.1.0`.
 
